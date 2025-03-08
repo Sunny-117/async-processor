@@ -1,0 +1,12 @@
+{
+  "name": "async-processor",
+  "version": "1.0.0",
+  "description": "一个轻量级、高性能的异步处理工具库，用于优化 JavaScript 中的异步操作。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
