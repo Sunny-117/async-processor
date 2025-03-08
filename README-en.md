@@ -1,4 +1,4 @@
-# 🌟 async-processor 
+# 🌟 async-processor
 
 [🇺🇸 English] | [🇨🇳 简体中文](./README.md)
 
@@ -6,11 +6,11 @@
 
 ## 🌟 Features
 
-✨ **Lightweight**: Zero-dependency, core <3kb  
-⚡ **High Performance**: Smart parallel processing + cache reuse  
-🔄 **Multi-strategy**: Parallel/Serial modes  
-💾 **Extensible Cache**: Memory/LocalStorage/Custom stores  
-🔧 **Type Safe**: Full TypeScript support  
+✨ **Lightweight**: Zero-dependency, core <3kb
+⚡ **High Performance**: Smart parallel processing + cache reuse
+🔄 **Multi-strategy**: Parallel/Serial modes
+💾 **Extensible Cache**: Memory/LocalStorage/Custom stores
+🔧 **Type Safe**: Full TypeScript support
 🎯 **Error-first Conversion**: Auto convert callback to Promise
 
 ## 📦 Installation
@@ -23,14 +23,14 @@ npm install async-processor
 
 ### 🔄 Basic Usage
 ```ts
-import { createAsyncProcessor } from 'async-processor';
+import { createAsyncProcessor } from 'async-processor'
 
 function asyncAdd(a: number, b: number, cb: (err: any, res: number) => void) {
-  setTimeout(() => cb(null, a + b), 1000);
+  setTimeout(() => cb(null, a + b), 1000)
 }
 
-const processor = createAsyncProcessor(asyncAdd);
-processor(5, 3).then(console.log); // ➡️ 8
+const processor = createAsyncProcessor(asyncAdd)
+processor(5, 3).then(console.log) // ➡️ 8
 ```
 
 ### 🚀 Advanced: Multi-argument Sum
@@ -38,13 +38,13 @@ processor(5, 3).then(console.log); // ➡️ 8
 const sumProcessor = createAsyncProcessor(asyncAdd, {
   mode: 'parallel',
   keyGenerator: (a, b) => `add_${a}_${b}`
-});
+})
 
 async function sum(...nums: number[]) {
-  return sumProcessor(...nums);
+  return sumProcessor(...nums)
 }
 
-sum(1,2,3,4,5).then(console.log); // 15 (~1.2s)
+sum(1, 2, 3, 4, 5).then(console.log) // 15 (~1.2s)
 ```
 
 ## ⚙️ Configuration
@@ -61,17 +61,17 @@ sum(1,2,3,4,5).then(console.log); // 15 (~1.2s)
 ```ts
 class RedisCache implements CacheStore {
   async get(key: string) {
-    return redisClient.get(key);
+    return redisClient.get(key)
   }
-  
+
   async set(key: string, value: any) {
-    await redisClient.set(key, value);
+    await redisClient.set(key, value)
   }
 }
 
 const processor = createAsyncProcessor(asyncAdd, {
   cache: new RedisCache()
-});
+})
 ```
 
 ## 📖 API Docs
@@ -79,9 +79,9 @@ const processor = createAsyncProcessor(asyncAdd, {
 ### `createAsyncProcessor(originalFunc, options?)`
 ```ts
 interface Options<Args extends any[]> {
-  mode?: 'parallel' | 'serial';
-  cache?: CacheStore | false;
-  keyGenerator?: (...args: Args) => string;
+  mode?: 'parallel' | 'serial'
+  cache?: CacheStore | false
+  keyGenerator?: (...args: Args) => string
 }
 
 function createAsyncProcessor<Args extends any[], Result>(
