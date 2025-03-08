@@ -115,3 +115,6 @@ graph TD
   H --> J[RedisCache]
   H --> K[自定义缓存]
 ```
+## License
+
+[MIT](./LICENSE) License © [Sunny-117](https://github.com/Sunny-117)

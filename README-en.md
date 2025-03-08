@@ -109,5 +109,6 @@ graph TD
 
 ---
 
-📄 **License**: MIT | 💖 **Star this repo if helpful!**
-```
+## License
+
+[MIT](./LICENSE) License © [Sunny-117](https://github.com/Sunny-117)
