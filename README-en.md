@@ -80,6 +80,22 @@ const processor = createAsyncProcessor(asyncAdd, {
 })
 ```
 
+### 💾 Custom Complex Task Processing
+
+```ts
+function asyncRepeat(a: string, b: number, cb: (err: null, res: string) => void) {
+  setTimeout(() => cb(null, a.repeat(b)), 1000)
+}
+
+const complexProcessor = createAsyncProcessor(
+  asyncRepeat,
+  {
+    keyGenerator: (str, num) => `repeat_${str}_${num}`,
+  },
+)
+complexProcessor('ts', 3).then(console.log) // 输出 "tststs"
+```
+
 ## 📖 API Docs
 
 ### `createAsyncProcessor(originalFunc, options?)`

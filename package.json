@@ -35,7 +35,8 @@
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
     "release": "bumpp && pnpm publish",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "pnpm run build",
+    "prepare": "simple-git-hooks"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.0.0",
@@ -45,5 +46,11 @@
     "prettier": "^3.1.1",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }
