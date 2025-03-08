@@ -6,12 +6,12 @@
 
 ## 🌟 Features
 
-✨ **Lightweight**: Zero-dependency, core <3kb
-⚡ **High Performance**: Smart parallel processing + cache reuse
-🔄 **Multi-strategy**: Parallel/Serial modes
-💾 **Extensible Cache**: Memory/LocalStorage/Custom stores
-🔧 **Type Safe**: Full TypeScript support
-🎯 **Error-first Conversion**: Auto convert callback to Promise
+- ✨ **Lightweight**: Zero-dependency, core <3kb
+- ⚡ **High Performance**: Smart parallel processing + cache reuse
+- 🔄 **Multi-strategy**: Parallel/Serial modes
+- 💾 **Extensible Cache**: Memory/LocalStorage/Custom stores
+- 🔧 **Type Safe**: Full TypeScript support
+- 🎯 **Error-first Conversion**: Auto convert callback to Promise
 
 ## 📦 Installation
 
