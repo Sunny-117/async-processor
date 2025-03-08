@@ -1,10 +1,8 @@
 # 🌟 async-processor
 
-[🇨🇳 简体中文] | [🇺🇸 English](./README-en.md)
+简体中文 | [English](./README-en.md)
 
 ---
-
-<div id="中文文档"></div>
 
 ## 🚀 特性
 
