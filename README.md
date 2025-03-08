@@ -1,126 +1,122 @@
-# async-processor
+# 🌟 async-processor 
 
-一个轻量级、高性能的异步处理工具库，用于优化 JavaScript/TypeScript 中的异步操作。
+[🇨🇳 简体中文] | [🇺🇸 English](./README-en.md)
 
-## 特性
+---
 
-轻量级、零依赖
-多种执行策略：支持并行和串行执行模式
-内置缓存机制：避免重复计算，提高性能
-可扩展的缓存实现：内存缓存、LocalStorage 缓存，以及自定义缓存接口
-自定义缓存键生成：灵活控制缓存策略
-错误优先回调转 Promise：自动将传统回调风格 API 转换为 Promise
+<div id="中文文档"></div>
 
-## Install
+## 🚀 特性
 
-```shell
+✨ **轻量级**：零依赖，核心代码 <3kb  
+⚡ **高性能**：智能并行处理 + 缓存复用  
+🔄 **多策略**：并行/串行执行模式自由切换  
+💾 **可扩展缓存**：内存/LocalStorage/自定义存储  
+🔧 **类型安全**：完整的 TypeScript 支持  
+🎯 **错误优先转换**：自动将回调转为 Promise
+
+## 📦 安装
+
+```bash
 npm install async-processor
 ```
 
-## 基本用法
+## 🛠 快速开始
 
+### 🔄 基础用法
 ```ts
 import { createAsyncProcessor } from 'async-processor';
 
-// 原始的错误优先回调风格函数
-function asyncAdd(a: number, b: number, cb: (err: any, result: number) => void) {
+// 1️⃣ 定义原始异步函数
+function asyncAdd(a: number, b: number, cb: (err: any, res: number) => void) {
   setTimeout(() => cb(null, a + b), 1000);
 }
 
-// 创建优化后的处理器
-const optimizedAdd = createAsyncProcessor(asyncAdd);
+// 2️⃣ 创建处理器
+const processor = createAsyncProcessor(asyncAdd);
 
-// 使用 Promise 风格调用
-optimizedAdd(5, 3).then(result => {
-  console.log(result); // 8
-});
+// 3️⃣ Promise风格调用
+processor(5, 3).then(console.log); // ➡️ 8
 ```
 
-## 高级用法
-
-### 缓存控制
-
+### 🚀 高级示例：多参数求和
 ```ts
-import { createAsyncProcessor, MemoryCache } from 'async-processor';
-
-// 使用内存缓存
-const cachedProcessor = createAsyncProcessor(asyncAdd, {
-  cache: new MemoryCache(),
-  keyGenerator: (a, b) => `add_${a}_${b}` // 自定义缓存键
-});
-
-// 禁用缓存
-const noCacheProcessor = createAsyncProcessor(asyncAdd, {
-  cache: false
-});
-```
-
-### 执行模式
-
-```ts
-// 并行执行（默认）
-const parallelProcessor = createAsyncProcessor(asyncAdd, {
-  mode: 'parallel'
-});
-
-// 串行执行
-const serialProcessor = createAsyncProcessor(asyncAdd, {
-  mode: 'serial'
-});
-```
-### 自定义缓存实现
-
-```ts
-import { createAsyncProcessor, CacheStore } from 'async-processor';
-
-// 实现自定义缓存
-class RedisCache implements CacheStore {
-  async get(key: string) {
-    // 从 Redis 获取数据
-  }
-
-  async set(key: string, value: any) {
-    // 存储数据到 Redis
-  }
-}
-
-const redisProcessor = createAsyncProcessor(asyncAdd, {
-  cache: new RedisCache()
-});
-```
-
-### 复杂示例：多参数求和
-
-```ts
-import { createAsyncProcessor } from 'async-processor';
-
-// 创建优化后的处理器
-const optimizedSum = createAsyncProcessor(asyncAdd, {
+// 创建优化处理器
+const sumProcessor = createAsyncProcessor(asyncAdd, {
   mode: 'parallel',
   keyGenerator: (a, b) => `add_${a}_${b}`
 });
 
-// 最终求和函数
+// 递归求和函数
 async function sum(...nums: number[]) {
-  return optimizedSum(...nums);
+  return sumProcessor(...nums);
 }
 
 // 使用示例
-sum(1, 2, 3, 4, 5).then(result => {
-  console.log(result); // 15
+sum(1,2,3,4,5).then(console.log); // 15 (仅需~1.2s)
+```
+
+## ⚙️ 配置选项
+
+| 选项            | 类型                  | 默认值         | 描述                      |
+|-----------------|-----------------------|---------------|--------------------------|
+| `mode`         | `parallel \| serial` | `parallel`    | 执行模式                 |
+| `cache`        | `CacheStore \| false`| `MemoryCache` | 缓存实例或禁用缓存       |
+| `keyGenerator` | `(...args) => string`| JSON序列化    | 自定义缓存键生成策略     |
+
+## 🔧 扩展能力
+
+### 💾 自定义缓存
+```ts
+import { CacheStore } from 'async-processor';
+
+class RedisCache implements CacheStore {
+  async get(key: string) {
+    return redisClient.get(key);
+  }
+  
+  async set(key: string, value: any) {
+    await redisClient.set(key, value);
+  }
+}
+
+const processor = createAsyncProcessor(asyncAdd, {
+  cache: new RedisCache()
 });
 ```
 
-## API 参考
 
 
-`createAsyncProcessor(originalFunc, options)`
+## 📖 API 文档
 
-创建一个支持缓存和多种执行策略的异步处理器。
-参数:
-- originalFunc: 原始的错误优先回调风格函数
-- options: 处理器配置选项
-    - mode: 执行模式，'parallel'(默认) 或 'serial'
-    - cache: 缓存实现，默认为 MemoryCache 实例，设为 false 禁用缓存
-    - keyGenerator: 自定义缓存键生成函数
-返回: 返回一个 Promise 风格的函数
+### `createAsyncProcessor(originalFunc, options?)`
+```ts
+interface Options<Args extends any[]> {
+  mode?: 'parallel' | 'serial';
+  cache?: CacheStore | false;
+  keyGenerator?: (...args: Args) => string;
+}
+
+function createAsyncProcessor<Args extends any[], Result>(
+  func: (...args: [...Args, (err: any, res: Result) => void]) => void,
+  options?: Options<Args>
+): (...args: Args) => Promise<Result>
+```
+
+## 🎯 设计理念
+
+### 🧩 组合式架构
+```mermaid
+graph TD
+  A[原始函数] --> B(策略模式)
+  B --> C{执行模式}
+  C -->|并行| D[Promise.all]
+  C -->|串行| E[顺序执行]
+  B --> F(依赖倒置)
+  F --> G[IOC]
+  G --> H[接口编程]
+  H --> I[MemoryCache]
+  H --> J[RedisCache]
+  H --> K[自定义缓存]
+```
+
