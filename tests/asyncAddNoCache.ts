@@ -1,4 +1,4 @@
-import { createAsyncProcessor } from '..'
+import { createAsyncProcessor } from '../src'
 import { asyncAdd } from './test-utils'
 
 // 创建优化后的处理器

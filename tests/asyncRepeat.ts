@@ -1,4 +1,4 @@
-import { createAsyncProcessor } from '..'
+import { createAsyncProcessor } from '../src'
 import { asyncRepeat } from './test-utils'
 
 // 自定义复杂任务处理

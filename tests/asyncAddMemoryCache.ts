@@ -1,5 +1,4 @@
-import { createAsyncProcessor } from '..'
-import { MemoryCache } from '../cache'
+import { createAsyncProcessor, MemoryCache } from '../src'
 import { asyncAdd } from './test-utils'
 
 // 创建优化后的处理器
