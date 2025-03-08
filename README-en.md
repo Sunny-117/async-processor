@@ -127,7 +127,7 @@ graph TD
 [npm-downloads-href]: https://npmjs.com/package/async-processor
 [bundle-src]: https://img.shields.io/bundlephobia/minzip/async-processor?style=flat&colorA=080f12&colorB=1fa669&label=minzip
 [bundle-href]: https://bundlephobia.com/result?p=async-processor
-[license-src]: https://img.shields.io/github/license/antfu/async-processor.svg?style=flat&colorA=080f12&colorB=1fa669
-[license-href]: https://github.com/antfu/async-processor/blob/main/LICENSE
+[license-src]: https://img.shields.io/github/license/Sunny-117/async-processor.svg?style=flat&colorA=080f12&colorB=1fa669
+[license-href]: https://github.com/Sunny-117/async-processor/blob/main/LICENSE
 [jsdocs-src]: https://img.shields.io/badge/jsdocs-reference-080f12?style=flat&colorA=080f12&colorB=1fa669
 [jsdocs-href]: https://www.jsdocs.io/package/async-processor
