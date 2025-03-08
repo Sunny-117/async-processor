@@ -12,7 +12,7 @@ English | [简体中文](./README.md)
 
 ## 🌟 Features
 
-- ✨ **Lightweight**: Zero-dependency, core <3kb
+- ✨ **Lightweight**: Zero-dependency, core <1kb
 - ⚡ **High Performance**: Smart parallel processing + cache reuse
 - 🔄 **Multi-strategy**: Parallel/Serial modes
 - 💾 **Extensible Cache**: Memory/LocalStorage/Custom stores
